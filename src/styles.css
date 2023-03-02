@@ -1,0 +1,24 @@
+.App {
+  font-family: sans-serif;
+  text-align: center;
+}
+.editor {
+  transform: translateY(50%);
+  animation: show 0.2s ease-in-out 0.2s forwards;
+  /* transition: all .5s; */
+  visibility: hidden;
+}
+@keyframes show {
+  0% {
+    transform: translateY(50%);
+    visibility: hidden;
+  }
+  80% {
+    transform: translateY(-10%);
+    visibility: visible;
+  }
+  100% {
+    transform: translateY(0%);
+    visibility: visible;
+  }
+}

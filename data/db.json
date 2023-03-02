@@ -1,0 +1,25 @@
+{
+  "constomers": [
+    {
+      "id": 1,
+      "name": "John Doe",
+      "datetime": "2022-02-28T14:30:00Z",
+      "debt": 500,
+      "credit": 0
+    },
+    {
+      "id": 2,
+      "name": "Jane Smith",
+      "datetime": "2022-02-27T10:15:00Z",
+      "debt": 0,
+      "credit": 1000
+    },
+    {
+      "id": 3,
+      "name": "Bob Johnson",
+      "datetime": "2022-02-26T09:00:00Z",
+      "debt": 750,
+      "credit": 0
+    }
+  ]
+}
