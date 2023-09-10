@@ -6,10 +6,12 @@ const CompleteCostomers = ({ costomers, handleDelete }) => {
   );
   return (
     <div className="constomer-list">
-      <h1 className="text-2xl pt-3">Completed costomers</h1>
-      <span className="text-sm pb-3 font-semibold italic block text-zinc-300">
-        Completed {completedCost.length} costomers
-      </span>
+      <div className="sticky top-0 bg-white shadow-md z-50">
+        <h1 className="text-2xl pt-3">Completed costomers</h1>
+        <span className="text-sm pb-3 font-semibold italic block text-zinc-300">
+          Completed {completedCost.length} costomers
+        </span>
+      </div>
       {completedCost.map((constomer) => (
         <Person
           key={constomer.id}

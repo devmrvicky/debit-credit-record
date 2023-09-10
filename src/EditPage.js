@@ -1,29 +1,46 @@
+import { useEffect } from "react";
 import { FaMoneyBill, FaTimes, FaUser } from "react-icons/fa";
+import { useParams } from "react-router-dom";
 import { BackButton } from "./NavigationBtns";
 
-const Editor = ({
-  handleOpenEditor,
-  handleSubmit,
-  constomerData,
-  setCostomerData
+const EditPage = ({
+  costomers,
+  handleEditCostData,
+  editCostData,
+  setEditCostData,
 }) => {
+  const { id } = useParams();
+  const costForEdit = costomers.find(
+    (costomer) => costomer.id.toString() === id
+  );
+  useEffect(() => {
+    setEditCostData({
+      ...editCostData,
+      name:costForEdit.name,
+      id: costForEdit.id,
+      dateTime: costForEdit.dateTime,
+      debt: costForEdit.debt,
+      credit: costForEdit.credit,
+      status: costForEdit.status,
+    });
+  }, [costomers, setEditCostData]);
   return (
     <div className="editor w-full h-full bg-zinc-100 fixed top-0 right-0 z-50">
       <div className="flex items-center justify-between mt-10 mb-20 w-full max-w-lg mx-auto">
         <BackButton />
         <h1 className="text-2xl font-semibold text-gray-500">
-          Enter constomer data
+          Edit costumer data, {costForEdit.name}
         </h1>
         <button
           className="border border-black w-10 h-10 flex items-center justify-center rounded-full"
-          onClick={handleOpenEditor}
+          // onClick={handleOpenEditor}
         >
           <FaTimes />
         </button>
       </div>
       <form
         className="flex flex-col gap-4 bg-white h-full rounded-3xl shadow-2xl px-4 py-20 relative"
-        onSubmit={handleSubmit}
+        onSubmit={e => e.preventDefault()}
       >
         <FaUser className="absolute text-5xl border w-32 h-32 rounded-full p-2 bg-white -top-14 left-1/2 -translate-x-1/2 shadow-sm" />
         {/* name */}
@@ -43,13 +60,14 @@ const Editor = ({
             id="name"
             placeholder="Name"
             className="border p-2 text-md outline-none"
-            value={constomerData.name}
-            onChange={(e) =>
-              setCostomerData({ ...constomerData, name: e.target.value })
-            }
+            value={costForEdit.name}
+            readOnly
+            // onChange={(e) =>
+            //   setCostomerData({ ...constomerData, name: e.target.value })
+            // }
           />
         </label>
-        <lable
+        <label
           htmlFor="debt"
           className="flex flex-col gap-1 w-full  max-w-sm mx-auto "
         >
@@ -64,13 +82,14 @@ const Editor = ({
             id="debt"
             placeholder="Debt amount"
             className="border p-2 text-md outline-none"
-            value={constomerData.debt}
-            onChange={(e) =>
-              setCostomerData({ ...constomerData, debt: e.target.value })
-            }
+            value={editCostData.debt}
+            readOnly
+            // onChange={(e) =>
+            //   setCostomerData({ ...constomerData, debt: e.target.value })
+            // }
           />
-        </lable>
-        <lable
+        </label>
+        <label
           htmlFor="debt"
           className="flex flex-col gap-1 w-full  max-w-sm mx-auto "
         >
@@ -85,18 +104,18 @@ const Editor = ({
             id="debt"
             placeholder="Credit amount"
             className="border p-2 text-md outline-none"
-            value={constomerData.credit}
+            value={editCostData.credit}
             onChange={(e) =>
-              setCostomerData({ ...constomerData, credit: e.target.value })
+              setEditCostData({ ...editCostData, credit: e.target.value })
             }
           />
-        </lable>
-        <div className="flex items-center items-center justify-center gap-4 mt-16">
+        </label>
+        <div className="flex items-center justify-center gap-4 mt-16">
           <button type="reset" className="border w-32 h-10">
             Reset
           </button>
-          <button type="submit" className="border w-32 h-10">
-            Save
+          <button type="submit" className="border w-32 h-10" onClick={() => handleEditCostData(id)}>
+            Save change
           </button>
         </div>
       </form>
@@ -104,4 +123,4 @@ const Editor = ({
   );
 };
 
-export default Editor;
+export default EditPage;
